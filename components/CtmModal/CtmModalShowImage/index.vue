@@ -8,6 +8,20 @@
         :src="options.imageSrc"
         alt=""
       >
+      <div class="ctm-modal__desc desc">
+        <div
+          v-if="options.title"
+          class="desc__title"
+        >
+          {{ options.title }}
+        </div>
+        <div
+          v-if="options.desc"
+          class="desc__desc"
+        >
+          {{ options.desc }}
+        </div>
+      </div>
     </div>
   </ctm-modal-box>
 </template>
@@ -41,6 +55,25 @@ export default {
   }
   &__content {
     padding: 28px 28px 5px 28px !important;
+  }
+  &__desc {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+  }
+}
+.desc {
+  &__title {
+    @include text-simple;
+    margin: 10px 10px 0 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  &__desc {
+    margin: 10px 10px 0 0;
+    font-size: 16px;
+    font-weight: 400;
   }
 }
 

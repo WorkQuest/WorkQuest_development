@@ -103,7 +103,7 @@ export default {
         }
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        this.portfolio.data = await this.$store.dispatch('user/imageCaseType', { contentType: file.type });
+        this.portfolio.data = await this.$store.dispatch('user/imageType', { contentType: file.type });
         this.portfolio.file = file;
       }
       return this.portfolio;
@@ -126,6 +126,7 @@ export default {
           description: this.caseDescription,
           medias: [data.result.mediaId],
         };
+        console.log(payload);
         await this.$store.dispatch('user/setCaseData', payload);
         this.hide();
       } catch (error) {

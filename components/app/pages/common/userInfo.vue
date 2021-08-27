@@ -123,7 +123,11 @@
         </div>
       </div>
     </div>
-    <div class="share-btn" />
+    <button
+      @click="shareModal()"
+    >
+      <span class="share-btn" />
+    </button>
   </div>
 </template>
 
@@ -131,6 +135,7 @@
 import { mapGetters } from 'vuex';
 import contactPanel from '~/components/app/panels/contact';
 import socialPanel from '~/components/app/panels/social';
+import modals from '~/store/modals/modals';
 
 export default {
   name: 'UserInfo',
@@ -166,6 +171,11 @@ export default {
     this.localUserData = JSON.parse(JSON.stringify(this.userData));
   },
   methods: {
+    shareModal() {
+      this.ShowModal({
+        key: modals.sharingQuest,
+      });
+    },
     showMessages() {
       this.$router.push('/messages/1');
     },
@@ -349,6 +359,7 @@ export default {
     object-fit: cover;
   }
   &__col {
+    padding-right: 0;
     &_left {
       max-width: 142px;
       padding: 0 15px 0 0;

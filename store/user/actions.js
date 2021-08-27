@@ -1,6 +1,4 @@
 export default {
-
-  // Portfolios
   async getUserPortfolios({ commit }, id) {
     const response = await this.$axios.$get(`/v1/user/${id}/portfolio/cases`);
     commit('setUserPortfolioCases', response.result);
@@ -23,20 +21,17 @@ export default {
     return response;
   },
   async deletePortfolio({ commit }, id) {
-    // needed portfolio id
     const response = await this.$axios.$delete(`/v1/portfolio/${id}`);
     commit('setUserPortfolioCases', response.result);
     return response;
   },
 
-  // Reviews
   async getAllUserReviews({ commit }, id) {
     const response = await this.$axios.$get(`/v1/user/${id}/reviews`);
     commit('setUserReviews', response.result);
     return response;
   },
 
-  // Auth
   async signIn({ commit, dispatch }, payload) {
     const response = await this.$axios.$post('/v1/auth/login', payload);
     commit('setTokens', response.result);
@@ -115,7 +110,6 @@ export default {
     return response;
   },
 
-  // 2FA
   async disable2FA(payload) {
     return await this.$axios.$post('/v1/totp/disable', payload);
   },
@@ -126,7 +120,6 @@ export default {
     return await this.$axios.$post('/v1/totp/confirm', payload);
   },
 
-  // SMS Ver
   async sendPhone(payload) {
     return await this.$axios.$post('/v1/profile/phone/send-code', payload);
   },

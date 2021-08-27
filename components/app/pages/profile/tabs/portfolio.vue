@@ -7,24 +7,25 @@
         class="portfolio__item"
       >
         <div class="portfolio__card">
-          <button
-            class="portfolio__close"
-            @click="deletePortfolio(item.id)"
-          >
-            <span
-              class="icon-close_big"
-            />
-          </button>
           <div class="portfolio__body">
             <div
               v-for="(img, j) in item.medias"
               :key="j"
               class="portfolio__img"
             >
+              <button
+                class="portfolio__close"
+                @click="deletePortfolio(item.id)"
+              >
+                <span
+                  class="icon-close_big"
+                />
+              </button>
               <img
                 class="portfolio__image"
                 :src="img.url"
-                :alt="img.name"
+                :alt="item.title"
+                @click="openImage(img.url, item.title, item.description)"
               >
             </div>
           </div>
@@ -44,6 +45,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import modals from '~/store/modals/modals';
 
 export default {
   name: 'PortfolioTab',
@@ -57,6 +59,16 @@ export default {
     await this.getAllPortfolios();
   },
   methods: {
+    openImage(src, name, desc) {
+      if (window.innerWidth >= 761) {
+        this.ShowModal({
+          key: modals.showImage,
+          imageSrc: src,
+          title: name,
+          desc,
+        });
+      }
+    },
     async getAllPortfolios() {
       try {
         const { id } = this.userData;
@@ -69,7 +81,14 @@ export default {
       }
     },
     async deletePortfolio(id) {
-      await this.$store.dispatch('user/deletePortfolio', id);
+      try {
+        const response = this.$store.dispatch('user/deletePortfolio', id);
+        if (response?.ok) {
+          console.log('response ok');
+        }
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 };
@@ -79,16 +98,29 @@ export default {
 
 .portfolio {
   &__close {
-    background: $red;
-    border: 1px solid $black400;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
     border-radius: 6px;
     padding: 2px;
+    transition: 0.5s;
+    &:hover {
+      background: $red;
+    }
   }
   &__card {
     border-radius: 6px;
     cursor: pointer;
     position: relative;
-    box-shadow: -1px 1px 8px 0px rgba(34, 60, 80, 0.2);
+    transition: 0.3s;
+    &:hover {
+      box-shadow: 0 0 10px 2px rgba(34, 60, 80, 0.3);
+    }
   }
   &__items {
     display: grid;
@@ -97,7 +129,7 @@ export default {
   }
   &__image {
     height: 350px;
-    object-fit: scale-down;
+    width: 100%;
     border-radius: 6px;
   }
   &__name {
