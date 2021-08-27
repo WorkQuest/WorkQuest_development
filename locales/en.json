@@ -127,6 +127,8 @@
     }
   },
   "meta": {
+    "pay": "Pay",
+    "skipAndEnd": "Skip and end",
     "cleanUp": "Clean up",
     "close": "Close",
     "delete": "Delete",
@@ -254,6 +256,24 @@
     "fixedTerm": "Fixed term",
     "contract": "Contract",
     "remoteWork": "Remote work",
+    "levels": {
+      "1": {
+        "title": "Gold Plus Package",
+        "desc": "Notifications for employees who were looking for quests, via an offer to review the quest that has been promoted by the employer. The employee will be invited to complete the quest in based on the most recent search categories of the employee. Plus the ability to choose any category and any location to promote the quest."
+      },
+      "2": {
+        "title": "Gold Package",
+        "desc": "Notifications for employees who were looking for quests with a direct offer to review the promoted quest based on the most recent search categories of the employee. Plus the ability to choose three categories and three locations to promote the quest."
+      },
+      "3": {
+        "title": "Silver Package",
+        "desc": "Pin quest on the main page for three hours, with the ability to choose two categories and two locations for promotion the quest."
+      },
+      "4": {
+        "title": "Bronze Package",
+        "desc": "Pin the quest on the main page for one hour, with the ability to choose one category and one location to promote the quest."
+      }
+    },
     "createQuest": {
       "choosePeriod": "Choose period"
     },
